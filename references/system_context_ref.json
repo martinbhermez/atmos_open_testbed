@@ -1,0 +1,366 @@
+{
+  "domains": [
+    {
+      "name": "Battery",
+      "primary_attributes": [
+        "SoC (State of Charge)",
+        "SoH (State of Health)",
+        "Voltage (per cell, pack)",
+        "Current (charge/discharge)",
+        "Temperature",
+        "Internal Resistance",
+        "Energy Capacity",
+        "Cell Balancing Status",
+        "Cycle Count",
+        "Cell Chemistry (NMC, LFP, etc.)"
+      ],
+      "typical_targets_values": [
+        "SoC range: 0–100%",
+        "SoH > 80% considered \"good\"",
+        "Nominal pack voltage: 400 V or 800 V",
+        "Safe temperature range: -20°C to +60°C",
+        "Max charge C-rate: 0.5–3C",
+        "Max discharge C-rate: 1–5C",
+        "Capacity fade: ~2–3% per year"
+      ],
+      "key_design_parameters": [
+        "Cell & pack mechanical design",
+        "BMS calibration (voltage/current/temperature thresholds)",
+        "Thermal runaway detection",
+        "Overvoltage/undervoltage cutoffs",
+        "Cell balancing algorithm",
+        "Communication protocol with BMS (CAN, LIN)"
+      ],
+      "additional_considerations_failure_modes": [
+        "Over-temp: Thermal runaway risk",
+        "Over-voltage: Possible cell damage",
+        "Under-voltage: Reduced life or immediate shutoff",
+        "Cell imbalance: Accelerated degradation",
+        "Internal short-circuit: Fire hazard"
+      ],
+      "keywords_triggers": [
+        "battery capacity",
+        "thermal runaway",
+        "cell voltage",
+        "BMS fault",
+        "charge limit",
+        "SoC alarm",
+        "cell imbalance"
+      ],
+      "cross_domain_dependencies": [
+        "Thermal: Heating/cooling requirements",
+        "Propulsion: Power/torque derating if SoC is low or pack is hot/cold",
+        "Safety: Shutdown on over-voltage/over-temp",
+        "Charging: Charge rate limited by SoC/temperature",
+        "User Interface: Display SoC, warnings",
+        "Drivability: Regen limits dependent on SoC"
+      ]
+    },
+    {
+      "name": "Propulsion",
+      "primary_attributes": [
+        "Motor Torque",
+        "Motor Speed (RPM)",
+        "Power Output",
+        "Efficiency",
+        "Inverter Temperature",
+        "Gear Ratio",
+        "Motor Type (PM, induction)",
+        "DC-Link Voltage",
+        "Peak vs. Continuous Power",
+        "Rotor/Stator Temperature"
+      ],
+      "typical_targets_values": [
+        "Torque range: 0–500 Nm",
+        "Speed range: 0–20,000 RPM",
+        "Power range: 50–600 kW",
+        "Efficiency peaks ~88–95%",
+        "Inverter safe operating <120°C",
+        "DC-link nominal voltage: 400/800 V",
+        "Peak power limited by duty cycle"
+      ],
+      "key_design_parameters": [
+        "Inverter switching frequency (10–20 kHz)",
+        "Cooling system capacity (liquid or air)",
+        "Rotor mass/inertia",
+        "Control algorithms (FOC, DTC)",
+        "Power stage semiconductor tech (IGBT, SiC MOSFET)"
+      ],
+      "additional_considerations_failure_modes": [
+        "Overcurrent: Inverter or motor damage",
+        "Over-speed: Mechanical failure",
+        "Controller fault: Loss of torque",
+        "Over-temp: Motor winding or semiconductor damage",
+        "Torque ripple or noise: NVH issues"
+      ],
+      "keywords_triggers": [
+        "acceleration request",
+        "torque limit",
+        "derating",
+        "efficiency map",
+        "peak power demand",
+        "inverter fault"
+      ],
+      "cross_domain_dependencies": [
+        "Battery: Voltage/current supply capability",
+        "Thermal: Motor/inverter cooling",
+        "Drivability: Vehicle dynamics & traction",
+        "Safety: Over-torque or overspeed protection",
+        "User Interface: Display power output or warnings"
+      ]
+    },
+    {
+      "name": "Thermal",
+      "primary_attributes": [
+        "Coolant Temperature",
+        "HVAC Temperature",
+        "Motor/Inverter Temps",
+        "Battery Pack Temps",
+        "Heat Exchanger Efficiency",
+        "Airflow / Fan Speed",
+        "Refrigerant Pressure",
+        "Cabin Climate Control",
+        "Thermal Management Modes (Eco, Normal, Max)"
+      ],
+      "typical_targets_values": [
+        "Coolant temp range: -30°C to +90°C",
+        "Battery pack ideal: 20–40°C",
+        "Motor/Inverter safe zone <120°C",
+        "Cabin comfort: 18–24°C",
+        "Fan/Pump speeds: 0–100% duty cycle",
+        "Refrigerant pressure: ~100–300 psi"
+      ],
+      "key_design_parameters": [
+        "Radiator/Condenser design",
+        "Coolant flow rate control (variable pumps)",
+        "Heater/Chiller capacity (kW)",
+        "Sensor placement & redundancy",
+        "Integration with BMS for pack conditioning",
+        "HVAC layout for cabin and battery system"
+      ],
+      "additional_considerations_failure_modes": [
+        "Overheating: Reduced life or immediate damage",
+        "Freezing coolant: Pump or line damage",
+        "Leakage: Refrigerant or coolant loss",
+        "Sensor failure: Inaccurate temperature control",
+        "Insufficient cooling during fast charge"
+      ],
+      "keywords_triggers": [
+        "overheating",
+        "coolant flow rate",
+        "HVAC override",
+        "thermal limit",
+        "fan speed",
+        "heat pump failure"
+      ],
+      "cross_domain_dependencies": [
+        "Battery: Cooling/heating control",
+        "Propulsion: Motor/Inverter cooling demands",
+        "Charging: Fast-charge thermal strategy",
+        "Safety: Over-temp shutdown or restricted performance",
+        "User Interface: Thermal warnings or user climate settings"
+      ]
+    },
+    {
+      "name": "User Interface",
+      "primary_attributes": [
+        "Displays (speed, SoC, power)",
+        "HMI (touchscreen, physical buttons)",
+        "Alerts/Warnings",
+        "Infotainment (audio, navigation)",
+        "Instrument Cluster Layout",
+        "Driver Profile Settings",
+        "Voice Recognition",
+        "Remote App Integration"
+      ],
+      "typical_targets_values": [
+        "Real-time SoC, range estimate ±5%",
+        "System alerts: Battery overheating, drive fault",
+        "Infotainment transitions <1s",
+        "Voice recognition accuracy: >90%",
+        "OTA update capability"
+      ],
+      "key_design_parameters": [
+        "UI/UX design guidelines",
+        "Alert priority levels (ISO 26262-based)",
+        "Localization and language support",
+        "Data refresh rates (10 Hz for speed, 1 Hz for SoC)",
+        "Connectivity (cellular, Wi-Fi) for OTA updates"
+      ],
+      "additional_considerations_failure_modes": [
+        "Display freeze or crash",
+        "Incorrect alerts leading to confusion",
+        "Delayed updates for safety-critical info",
+        "Security breach via infotainment",
+        "Driver distraction from complex UI"
+      ],
+      "keywords_triggers": [
+        "driver alert",
+        "range anxiety",
+        "warning message",
+        "OTA update",
+        "touchscreen command",
+        "user login"
+      ],
+      "cross_domain_dependencies": [
+        "Battery: SoC, range",
+        "Safety: Critical warnings",
+        "Thermal: Overheat notifications",
+        "Propulsion: Power/torque feedback",
+        "Drivability: Mode selection",
+        "Charging: Charge status, time to full"
+      ]
+    },
+    {
+      "name": "Drivability",
+      "primary_attributes": [
+        "Acceleration Response",
+        "Brake Regen Profile",
+        "Steering Feel (EPS)",
+        "Suspension Damping",
+        "Vehicle Dynamics Control (ESP, TCS)",
+        "Drive Modes (Eco, Sport, Off-road)",
+        "Pedal Mapping",
+        "Launch Control",
+        "Creep/Low-speed Behavior"
+      ],
+      "typical_targets_values": [
+        "0–60 mph: 3–8 s range",
+        "Regen levels: mild, moderate, aggressive",
+        "Steering assist levels: comfort, normal, sport",
+        "TCS threshold for slip ratio control",
+        "Eco mode: limited torque, Sport mode: higher torque"
+      ],
+      "key_design_parameters": [
+        "Powertrain calibration (accel curves, torque requests)",
+        "ESC/TCS strategies (yaw, slip detection)",
+        "Suspension type (air, coil, adaptive)",
+        "Steering assist torque curves",
+        "Drive mode selection logic"
+      ],
+      "additional_considerations_failure_modes": [
+        "Excess wheel spin: TCS intervention",
+        "Insufficient regen: Wasted energy",
+        "Overly aggressive regen: Poor user experience",
+        "Inconsistent pedal mapping: Driver confusion",
+        "Suspension/steering ECU fault: Loss of control"
+      ],
+      "keywords_triggers": [
+        "regen braking",
+        "traction control",
+        "sport mode",
+        "comfort mode",
+        "launch control",
+        "pedal mapping"
+      ],
+      "cross_domain_dependencies": [
+        "Propulsion: Torque/power regulation, regen torque",
+        "Battery: Regen current limits",
+        "Thermal: Heat from dynamic driving",
+        "User Interface: Mode selection feedback",
+        "Safety: ESC, TCS overrides",
+        "Charging: Possibly reduced performance while plugged in"
+      ]
+    },
+    {
+      "name": "Safety",
+      "primary_attributes": [
+        "Crash Detection (airbag sensors, accelerometers)",
+        "Functional Safety (ISO 26262)",
+        "Overcurrent/Overvoltage Protection",
+        "High Voltage Interlock (HVIL)",
+        "Redundant Sensors (brake, steering)",
+        "Fail-Safe vs. Fail-Operational Modes",
+        "Intrusion Detection"
+      ],
+      "typical_targets_values": [
+        "Immediate HV disconnect on crash",
+        "ASIL levels (A–D) for safety-critical functions",
+        "Current/voltage trip thresholds",
+        "HVIL continuity check",
+        "Real-time intrusion detection for connected systems"
+      ],
+      "key_design_parameters": [
+        "Redundancy strategy (dual microcontrollers)",
+        "Torque/voltage limitation mechanisms",
+        "Hardware design for short-circuit or ground fault",
+        "Diagnostics and fault management",
+        "Cybersecurity posture for ECU-level intrusion detection"
+      ],
+      "additional_considerations_failure_modes": [
+        "HVIL open -> system shutdown",
+        "Sensor mismatch -> limp-home or degrade mode",
+        "Security threat -> restricted operation or alert",
+        "Crash event -> rapid battery isolation",
+        "Overvoltage -> converter/inverter shutoff",
+        "Overcurrent -> fuse or breaker activation"
+      ],
+      "keywords_triggers": [
+        "emergency shutdown",
+        "overvoltage trip",
+        "crash detected",
+        "fault code",
+        "HVIL open",
+        "airbag deployment"
+      ],
+      "cross_domain_dependencies": [
+        "Battery: Disconnect on crash/fault",
+        "Propulsion: Derate torque or shut off",
+        "Thermal: Shut down or forced cooling",
+        "User Interface: Display critical warnings",
+        "Charging: Prevent charging if HV safety compromised",
+        "Drivability: Limp-home mode if sensor fails"
+      ]
+    },
+    {
+      "name": "Charging",
+      "primary_attributes": [
+        "AC Charging Power",
+        "DC Fast Charge Rate",
+        "Connector Type (CCS, CHAdeMO, Tesla)",
+        "Charging Efficiency",
+        "Onboard Charger Specs",
+        "Charge Curve (voltage/current vs. SoC)",
+        "Communication Protocol (PLC, CAN)",
+        "Pilot Signal Handling"
+      ],
+      "typical_targets_values": [
+        "AC Level 2: 7–22 kW",
+        "DC Fast Charging: up to 350 kW",
+        "Voltage range: 300–1000 V",
+        "Current limit: up to 500–800 A",
+        "Efficiency ~90–95%",
+        "Charge curve: Taper near 80–90% SoC"
+      ],
+      "key_design_parameters": [
+        "Onboard charger power rating (kW)",
+        "Thermal management for high-current charging",
+        "HV architecture for DC link",
+        "Charging protocol compliance (ISO 15118, etc.)",
+        "Connector mechanical design & safety lock"
+      ],
+      "additional_considerations_failure_modes": [
+        "Overvoltage or overcurrent from charger",
+        "Connector misalignment or damage",
+        "Pilot signal failure: Cannot initiate charge",
+        "Cooling system overload during fast charge",
+        "Communication drop-out: incomplete or abrupt end of charge"
+      ],
+      "keywords_triggers": [
+        "fast charge",
+        "AC level 2",
+        "charge voltage limit",
+        "pilot signal error",
+        "charging curve",
+        "iso fault"
+      ],
+      "cross_domain_dependencies": [
+        "Battery: SoC, temperature, maximum charge current",
+        "Thermal: Active cooling for high-power charging",
+        "Safety: HVIL, ground fault detection",
+        "User Interface: Charge status, time remaining",
+        "Propulsion: Possibly disable or limit drive while charging"
+      ]
+    }
+  ]
+}

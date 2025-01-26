@@ -1,0 +1,70 @@
+
+<mxGraphModel dx="1220" dy="620" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    
+    <!-- Training Data Block -->
+    <mxCell id="2" value="Training Data&#10;&#10;This block gathers all required inputs for training:&#10;- Datasheets: Technical specs from manufacturers (e.g., STM32).&#10;- Code Repositories: Open-source or in-house projects.&#10;- Diagrams: Electrical architecture in formats like JSON or PDFs.&#10;- Coding Standards: Rules such as MISRA for compliance.&#10;&#10;Tips: Organize data in structured folders. Use version control (e.g., GitHub) to manage code and annotate diagrams clearly." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="100" y="100" width="300" height="150" as="geometry" />
+    </mxCell>
+    
+    <!-- Preprocessing Block -->
+    <mxCell id="3" value="Preprocessing&#10;&#10;This step cleans and structures the data:&#10;- Convert PDFs using OCR tools (e.g., Tesseract).&#10;- Parse code into tokens using Clang or AST libraries.&#10;- Annotate datasets for context (e.g., labels like 'Peripheral Setup' or 'RTOS Tasks').&#10;&#10;Tools: Use Python libraries such as PyPDF2 for PDF parsing and PyAST for code parsing. Validate annotations with sample runs." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+      <mxGeometry x="450" y="100" width="300" height="150" as="geometry" />
+    </mxCell>
+    
+    <!-- AWS S3 Block -->
+    <mxCell id="4" value="AWS S3&#10;&#10;Stores processed datasets for easy access during training.&#10;- Organize data into buckets (e.g., 'raw', 'processed').&#10;- Use versioning to maintain a history of changes.&#10;&#10;Tips: Ensure datasets are compressed (e.g., zip, tar.gz) before upload. Use AWS CLI or SDK to manage data programmatically." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="850" y="100" width="300" height="150" as="geometry" />
+    </mxCell>
+    
+    <!-- Training Framework Block -->
+    <mxCell id="5" value="Training Framework&#10;&#10;Fine-tunes the base model using the structured dataset.&#10;- Hugging Face: Provides pre-built scripts and APIs for training.&#10;- PyTorch: Handles custom training loops for flexibility.&#10;&#10;Tips: Start with small datasets for quick testing. Monitor GPU usage and adjust batch sizes for efficiency. Use tools like Weights & Biases for experiment tracking." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+      <mxGeometry x="450" y="300" width="300" height="150" as="geometry" />
+    </mxCell>
+    
+    <!-- AWS EC2 Block -->
+    <mxCell id="6" value="AWS EC2&#10;&#10;Provides GPU instances for training tasks.&#10;- Choose instance types like p3.2xlarge for faster performance.&#10;- Set up AMIs with pre-installed libraries (e.g., PyTorch, CUDA).&#10;&#10;Tips: Use spot instances to reduce costs. Automate instance setup with scripts for repeatable experiments." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="850" y="300" width="300" height="150" as="geometry" />
+    </mxCell>
+    
+    <!-- Fine-Tuned Model Block -->
+    <mxCell id="7" value="Fine-Tuned Model&#10;&#10;Outputs a model optimized for embedded systems:&#10;- Handles multi-file awareness and dependency mapping.&#10;- Adheres to coding standards during generation.&#10;&#10;Tips: Validate the model on edge cases and real-world examples. Continuously refine the dataset based on results." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+      <mxGeometry x="850" y="500" width="300" height="150" as="geometry" />
+    </mxCell>
+    
+    <!-- Deployment Block -->
+    <mxCell id="8" value="Model Deployment&#10;&#10;Hosts the trained model for real-world use:&#10;- Deploy on AWS SageMaker or EC2.&#10;- Create scalable endpoints for multiple users.&#10;&#10;Tips: Monitor API latency and optimize infrastructure. Use load balancing for reliability." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+      <mxGeometry x="450" y="500" width="300" height="150" as="geometry" />
+    </mxCell>
+    
+    <!-- Integrated API Block -->
+    <mxCell id="9" value="Integrated API&#10;&#10;Provides user-friendly access to the model:&#10;- Endpoints for tasks like code generation and validation.&#10;- Built with frameworks like Flask or FastAPI.&#10;&#10;Tips: Add documentation for API usage. Ensure error handling for invalid queries." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="100" y="500" width="300" height="150" as="geometry" />
+    </mxCell>
+    
+    <!-- Connections -->
+    <mxCell id="10" value="Extract and Organize Data" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2" target="3">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="11" value="Upload Processed Data" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="3" target="4">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="12" value="Load Data for Training" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="4" target="5">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="13" value="Run Training on GPU" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="5" target="6">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="14" value="Produce Fine-Tuned Model" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="6" target="7">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="15" value="Deploy to Endpoints" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="7" target="8">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="16" value="Provide User Access" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8" target="9">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>
